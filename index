@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Alcancía Digital</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    .user-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin: 15px;
+      width: 300px;
+      text-align: center;
+    }
+    .total {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 15px 0;
+    }
+    button {
+      margin: 5px;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+    button:hover {
+      opacity: 0.8;
+    }
+    .enojo { background: #e74c3c; color: white; }
+    .maltrato { background: #f39c12; color: white; }
+    .reset { background: #7f8c8d; color: white; }
+  </style>
+</head>
+<body>
+  <h1>💰 Alcancía Digital</h1>
+
+  <!-- Usuario 1 -->
+  <div class="user-card">
+    <h2>Usuario 1</h2>
+    <p class="total" id="total1">$5</p>
+    <button class="enojo" onclick="sumar('usuario1',2)">+ Enojo (+$2)</button>
+    <button class="maltrato" onclick="sumar('usuario1',1)">+ Mal Trato (+$1)</button>
+    <br>
+    <button class="reset" onclick="resetear('usuario1')">🔄 Resetear</button>
+  </div>
+
+  <!-- Usuario 2 -->
+  <div class="user-card">
+    <h2>Usuario 2</h2>
+    <p class="total" id="total2">$5</p>
+    <button class="enojo" onclick="sumar('usuario2',2)">+ Enojo (+$2)</button>
+    <button class="maltrato" onclick="sumar('usuario2',1)">+ Mal Trato (+$1)</button>
+    <br>
+    <button class="reset" onclick="resetear('usuario2')">🔄 Resetear</button>
+  </div>
+
+  <script>
+    // Valores iniciales
+    let usuarios = {
+      usuario1: 5,
+      usuario2: 5
+    };
+
+    // Cargar desde localStorage si existe
+    if (localStorage.getItem("usuarios")) {
+      usuarios = JSON.parse(localStorage.getItem("usuarios"));
+    }
+
+    // Mostrar valores iniciales
+    document.getElementById("total1").textContent = "$" + usuarios.usuario1;
+    document.getElementById("total2").textContent = "$" + usuarios.usuario2;
+
+    // Función para sumar
+    function sumar(usuario, cantidad) {
+      usuarios[usuario] += cantidad;
+      document.getElementById(usuario === "usuario1" ? "total1" : "total2").textContent = "$" + usuarios[usuario];
+      localStorage.setItem("usuarios", JSON.stringify(usuarios));
+    }
+
+    // Función para resetear
+    function resetear(usuario) {
+      usuarios[usuario] = 5; // vuelve al valor inicial
+      document.getElementById(usuario === "usuario1" ? "total1" : "total2").textContent = "$" + usuarios[usuario];
+      localStorage.setItem("usuarios", JSON.stringify(usuarios));
+    }
+  </script>
+</body>
+</html>
