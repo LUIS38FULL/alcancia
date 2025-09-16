@@ -49,4 +49,57 @@
   </style>
 </head>
 <body>
-  <h1>💰 Alcanc
+  <h1>💰 Alcancía Digital</h1>
+
+  <!-- Menso -->
+  <div class="user-card">
+    <h2>Menso</h2>
+    <p class="total" id="total1">$5</p>
+    <button class="enojo" onclick="sumar('usuario1',2)">+ Enojo (+$2)</button>
+    <button class="maltrato" onclick="sumar('usuario1',1)">+ Mal Trato (+$1)</button>
+    <br>
+    <button class="reset" onclick="resetear('usuario1')">🔄 Resetear</button>
+  </div>
+
+  <!-- Intensa -->
+  <div class="user-card">
+    <h2>Intensa</h2>
+    <p class="total" id="total2">$5</p>
+    <button class="enojo" onclick="sumar('usuario2',2)">+ Enojo (+$2)</button>
+    <button class="maltrato" onclick="sumar('usuario2',1)">+ Mal Trato (+$1)</button>
+    <br>
+    <button class="reset" onclick="resetear('usuario2')">🔄 Resetear</button>
+  </div>
+
+  <script>
+    // Valores iniciales
+    let usuarios = {
+      usuario1: 5,
+      usuario2: 5
+    };
+
+    // Cargar desde localStorage si existe
+    if (localStorage.getItem("usuarios")) {
+      usuarios = JSON.parse(localStorage.getItem("usuarios"));
+    }
+
+    // Mostrar valores iniciales
+    document.getElementById("total1").textContent = "$" + usuarios.usuario1;
+    document.getElementById("total2").textContent = "$" + usuarios.usuario2;
+
+    // Función para sumar
+    function sumar(usuario, cantidad) {
+      usuarios[usuario] += cantidad;
+      document.getElementById(usuario === "usuario1" ? "total1" : "total2").textContent = "$" + usuarios[usuario];
+      localStorage.setItem("usuarios", JSON.stringify(usuarios));
+    }
+
+    // Función para resetear
+    function resetear(usuario) {
+      usuarios[usuario] = 5; // vuelve al valor inicial
+      document.getElementById(usuario === "usuario1" ? "total1" : "total2").textContent = "$" + usuarios[usuario];
+      localStorage.setItem("usuarios", JSON.stringify(usuarios));
+    }
+  </script>
+</body>
+</html>
