@@ -10,12 +10,23 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       min-height: 100vh;
       margin: 0;
+      padding: 20px;
     }
     h1 {
+      margin-bottom: 10px;
+    }
+    .general {
+      font-size: 22px;
+      font-weight: bold;
       margin-bottom: 20px;
+      background: #27ae60;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
     .user-card {
       background: white;
@@ -50,6 +61,7 @@
 </head>
 <body>
   <h1>💰 Alcancía Digital</h1>
+  <div class="general" id="totalGeneral">Total General: $10</div>
 
   <!-- Menso -->
   <div class="user-card">
@@ -84,23 +96,33 @@
     }
 
     // Mostrar valores iniciales
-    document.getElementById("total1").textContent = "$" + usuarios.usuario1;
-    document.getElementById("total2").textContent = "$" + usuarios.usuario2;
+    actualizarPantalla();
 
     // Función para sumar
     function sumar(usuario, cantidad) {
       usuarios[usuario] += cantidad;
-      document.getElementById(usuario === "usuario1" ? "total1" : "total2").textContent = "$" + usuarios[usuario];
-      localStorage.setItem("usuarios", JSON.stringify(usuarios));
+      guardarYActualizar();
     }
 
     // Función para resetear
     function resetear(usuario) {
       usuarios[usuario] = 5; // vuelve al valor inicial
-      document.getElementById(usuario === "usuario1" ? "total1" : "total2").textContent = "$" + usuarios[usuario];
+      guardarYActualizar();
+    }
+
+    // Guardar y actualizar pantalla
+    function guardarYActualizar() {
       localStorage.setItem("usuarios", JSON.stringify(usuarios));
+      actualizarPantalla();
+    }
+
+    // Actualizar HTML
+    function actualizarPantalla() {
+      document.getElementById("total1").textContent = "$" + usuarios.usuario1;
+      document.getElementById("total2").textContent = "$" + usuarios.usuario2;
+      let suma = usuarios.usuario1 + usuarios.usuario2;
+      document.getElementById("totalGeneral").textContent = "Total General: $" + suma;
     }
   </script>
 </body>
 </html>
-
