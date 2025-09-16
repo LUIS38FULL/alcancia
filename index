@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Alcancía Digital</title>
+  <title>Alcancía </title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -49,33 +49,33 @@
   </style>
 </head>
 <body>
-  <h1>💰 Alcancía Digital</h1>
+  <h1>💰 Alcancía </h1>
 
-  <!-- Usuario 1 -->
+  <!-- Menso -->
   <div class="user-card">
-    <h2>Usuario 1</h2>
+    <h2>Menso</h2>
     <p class="total" id="total1">$5</p>
-    <button class="enojo" onclick="sumar('usuario1',2)">+ Enojo (+$2)</button>
-    <button class="maltrato" onclick="sumar('usuario1',1)">+ Mal Trato (+$1)</button>
+    <button class="enojo" onclick="sumar('Menso',2)">+ Enojo (+$2)</button>
+    <button class="maltrato" onclick="sumar('Menso',1)">+ Mal Trato (+$1)</button>
     <br>
-    <button class="reset" onclick="resetear('usuario1')">🔄 Resetear</button>
+    <button class="reset" onclick="resetear('Menso')">🔄 Resetear</button>
   </div>
 
-  <!-- Usuario 2 -->
+  <!-- Intensa -->
   <div class="user-card">
-    <h2>Usuario 2</h2>
+    <h2>Intensa</h2>
     <p class="total" id="total2">$5</p>
-    <button class="enojo" onclick="sumar('usuario2',2)">+ Enojo (+$2)</button>
-    <button class="maltrato" onclick="sumar('usuario2',1)">+ Mal Trato (+$1)</button>
+    <button class="enojo" onclick="sumar('Intensa',2)">+ Enojo (+$2)</button>
+    <button class="maltrato" onclick="sumar('Intensa',1)">+ Mal Trato (+$1)</button>
     <br>
-    <button class="reset" onclick="resetear('usuario2')">🔄 Resetear</button>
+    <button class="reset" onclick="resetear('Intensa')">🔄 Resetear</button>
   </div>
 
   <script>
     // Valores iniciales
     let usuarios = {
-      usuario1: 5,
-      usuario2: 5
+      Menso: 5,
+      Intensa: 5
     };
 
     // Cargar desde localStorage si existe
@@ -84,20 +84,20 @@
     }
 
     // Mostrar valores iniciales
-    document.getElementById("total1").textContent = "$" + usuarios.usuario1;
-    document.getElementById("total2").textContent = "$" + usuarios.usuario2;
+    document.getElementById("total1").textContent = "$" + usuarios.Menso;
+    document.getElementById("total2").textContent = "$" + usuarios.Intensa;
 
     // Función para sumar
     function sumar(usuario, cantidad) {
       usuarios[usuario] += cantidad;
-      document.getElementById(usuario === "usuario1" ? "total1" : "total2").textContent = "$" + usuarios[usuario];
+      document.getElementById(usuario === "Menso" ? "total1" : "total2").textContent = "$" + usuarios[usuario];
       localStorage.setItem("usuarios", JSON.stringify(usuarios));
     }
 
     // Función para resetear
     function resetear(usuario) {
       usuarios[usuario] = 5; // vuelve al valor inicial
-      document.getElementById(usuario === "usuario1" ? "total1" : "total2").textContent = "$" + usuarios[usuario];
+      document.getElementById(usuario === "Menso" ? "total1" : "total2").textContent = "$" + usuarios[usuario];
       localStorage.setItem("usuarios", JSON.stringify(usuarios));
     }
   </script>
